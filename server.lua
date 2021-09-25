@@ -1,8 +1,3 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-
--- Code
-
 local Pings = {}
 
 QBCore.Commands.Add("ping", "", {{name = "action", help="id | accept | deny"}}, true, function(source, args)
@@ -51,6 +46,7 @@ AddEventHandler('wolf-pings:server:SendPing', function(id, coords)
                 Pings[id] = {
                     coords = coords,
                     sender = src,
+                    receiver = id,
                 }
                 TriggerClientEvent('QBCore:Notify', id, "You have received a ping from "..Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname..". /ping 'accept | deny'")
             else
@@ -66,5 +62,5 @@ end)
 
 RegisterServerEvent('wolf-pings:server:SendLocation')
 AddEventHandler('wolf-pings:server:SendLocation', function(PingData, SenderData)
-    TriggerClientEvent('wolf-pings:client:SendLocation', PingData.sender, PingData, SenderData)
+    TriggerClientEvent('wolf-pings:client:SendLocation', PingData.receiver, PingData, SenderData)
 end)

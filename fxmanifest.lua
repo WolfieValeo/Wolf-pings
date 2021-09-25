@@ -6,3 +6,8 @@ version '1.0.0'
 
 client_script 'client.lua'
 server_script 'server.lua'
+
+shared_scripts { 
+    '@qb-core/import.lua',
+    'config.lua'
+}
