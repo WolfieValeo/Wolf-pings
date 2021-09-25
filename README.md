@@ -9,3 +9,6 @@ Commands:
 
 
 Disables use of command when handcuffed.
+
+
+Special Thanks to Roobr for helping me fix the location not sending to the correct person
