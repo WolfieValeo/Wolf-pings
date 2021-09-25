@@ -16,8 +16,8 @@ local CurrentPings = {}
 
 local CurrentPings = {}
 
-RegisterNetEvent('qb-pings:client:DoPing')
-AddEventHandler('qb-pings:client:DoPing', function(id)
+RegisterNetEvent('wolf-pings:client:DoPing')
+AddEventHandler('wolf-pings:client:DoPing', function(id)
     local player = GetPlayerFromServerId(id)
     local ped = GetPlayerPed(player)
     local pos = GetEntityCoords(ped)
@@ -27,26 +27,26 @@ AddEventHandler('qb-pings:client:DoPing', function(id)
         z = pos.z,
     }
     if not exports['qb-policejob']:IsHandcuffed() then
-        TriggerServerEvent('qb-pings:server:SendPing', id, coords)
+        TriggerServerEvent('wolf-pings:server:SendPing', id, coords)
     else
         QBCore.Functions.Notify('You cannot currently send pings.', 'error')
     end
 end)
 
-RegisterNetEvent('qb-pings:client:AcceptPing')
-AddEventHandler('qb-pings:client:AcceptPing', function(PingData, SenderData)
+RegisterNetEvent('wolf-pings:client:AcceptPing')
+AddEventHandler('wolf-pings:client:AcceptPing', function(PingData, SenderData)
     local ped = GetPlayerPed(-1)
     local pos = GetEntityCoords(ped)
 
     if not exports['qb-policejob']:IsHandcuffed() then
-        TriggerServerEvent('qb-pings:server:SendLocation', PingData, SenderData)
+        TriggerServerEvent('wolf-pings:server:SendLocation', PingData, SenderData)
     else
         QBCore.Functions.Notify('You cannot currently accept the ping.', 'error')
     end
 end)
 
-RegisterNetEvent('qb-pings:client:SendLocation')
-AddEventHandler('qb-pings:client:SendLocation', function(PingData, SenderData)
+RegisterNetEvent('wolf-pings:client:SendLocation')
+AddEventHandler('wolf-pings:client:SendLocation', function(PingData, SenderData)
     QBCore.Functions.Notify('The location is indicated on your map with a blip.', 'success')
 
     CurrentPings[PingData.sender] = AddBlipForCoord(PingData.coords.x, PingData.coords.y, PingData.coords.z)

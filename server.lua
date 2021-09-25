@@ -14,7 +14,7 @@ QBCore.Commands.Add("ping", "", {{name = "action", help="id | accept | deny"}}, 
     if PhoneItem ~= nil then
         if task == "accept" then
             if Pings[src] ~= nil then
-                TriggerClientEvent('qb-pings:client:AcceptPing', src, Pings[src], QBCore.Functions.GetPlayer(Pings[src].sender))
+                TriggerClientEvent('wolf-pings:client:AcceptPing', src, Pings[src], QBCore.Functions.GetPlayer(Pings[src].sender))
                 TriggerClientEvent('QBCore:Notify', Pings[src].sender, Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname.." accepted your ping!")
                 Pings[src] = nil
             else
@@ -29,15 +29,15 @@ QBCore.Commands.Add("ping", "", {{name = "action", help="id | accept | deny"}}, 
                 TriggerClientEvent('QBCore:Notify', src, "You have no ping open ..", "error")
             end
         else
-            TriggerClientEvent('qb-pings:client:DoPing', src, tonumber(args[1]))
+            TriggerClientEvent('wolf-pings:client:DoPing', src, tonumber(args[1]))
         end
     else
         TriggerClientEvent('QBCore:Notify', src, "You don't have a phone ..", "error")
     end
 end)
 
-RegisterServerEvent('qb-pings:server:SendPing')
-AddEventHandler('qb-pings:server:SendPing', function(id, coords)
+RegisterServerEvent('wolf-pings:server:SendPing')
+AddEventHandler('wolf-pings:server:SendPing', function(id, coords)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local Target = QBCore.Functions.GetPlayer(id)
@@ -64,7 +64,7 @@ AddEventHandler('qb-pings:server:SendPing', function(id, coords)
     end
 end)
 
-RegisterServerEvent('qb-pings:server:SendLocation')
-AddEventHandler('qb-pings:server:SendLocation', function(PingData, SenderData)
-    TriggerClientEvent('qb-pings:client:SendLocation', PingData.sender, PingData, SenderData)
+RegisterServerEvent('wolf-pings:server:SendLocation')
+AddEventHandler('wolf-pings:server:SendLocation', function(PingData, SenderData)
+    TriggerClientEvent('wolf-pings:client:SendLocation', PingData.sender, PingData, SenderData)
 end)
